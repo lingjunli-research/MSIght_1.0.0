@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSIght.refactor_he_lcmsms_msi_merge &mdash; MSIght December 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8a903c05"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MSIght
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MSIght</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MSIght.refactor_he_lcmsms_msi_merge</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MSIght.refactor_he_lcmsms_msi_merge</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Fri Nov 15 17:21:54 2024</span>
+
+<span class="sd">@author: lafields2</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">MSIght.refactor_mz_image_extract</span> <span class="kn">import</span> <span class="n">extract_mz_image_transform</span>
+<span class="kn">from</span> <span class="nn">MSIght.refactor_mz_image_extract</span> <span class="kn">import</span> <span class="n">overlay_msi_he</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="merge_all_results">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results">[docs]</a>
+<span class="k">def</span> <span class="nf">merge_all_results</span><span class="p">(</span><span class="n">output_directory</span><span class="p">,</span><span class="n">sample_name</span><span class="p">,</span><span class="n">fragger_out</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">sized_he_image</span><span class="p">,</span><span class="n">b_spline_apply</span><span class="p">):</span>
+    <span class="n">mz_image_dir_path</span> <span class="o">=</span> <span class="n">output_directory</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_mz_images&#39;</span>
+    <span class="k">try</span><span class="p">:</span>  
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mz_image_dir_path</span><span class="p">)</span>  
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>  
+        <span class="k">pass</span>
+    <span class="n">ms_fragger_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fragger_out</span><span class="p">)</span>
+    <span class="n">prot_list_df</span> <span class="o">=</span> <span class="n">ms_fragger_results</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Protein Name&#39;</span><span class="p">])</span>
+    <span class="n">prot_list</span> <span class="o">=</span> <span class="n">prot_list_df</span><span class="p">[</span><span class="s1">&#39;Protein Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">prot_list</span><span class="p">:</span>
+        <span class="n">mz_image_dir_protein_path</span> <span class="o">=</span> <span class="n">mz_image_dir_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s1">&#39;_mz_images&#39;</span>
+        <span class="k">try</span><span class="p">:</span>  
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mz_image_dir_protein_path</span><span class="p">)</span>  
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>  
+            <span class="k">pass</span>
+        <span class="n">prot_filtered_df</span> <span class="o">=</span> <span class="n">ms_fragger_results</span><span class="p">[</span><span class="n">ms_fragger_results</span><span class="p">[</span><span class="s1">&#39;Protein Name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">]</span>
+        <span class="n">image_composite_array</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">prot_filtered_df</span><span class="p">)):</span>
+            <span class="n">mz</span> <span class="o">=</span> <span class="n">prot_filtered_df</span><span class="p">[</span><span class="s1">&#39;Peptide Theoretical m/z (+1)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">tol</span> <span class="o">=</span> <span class="n">prot_filtered_df</span><span class="p">[</span><span class="s1">&#39;Calc. Da Error Threshold&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">z_value</span><span class="o">=</span><span class="mi">1</span>
+            <span class="n">mz_image_transformed</span> <span class="o">=</span> <span class="n">extract_mz_image_transform</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mz</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">z_value</span><span class="p">,</span> <span class="n">b_spline_apply</span><span class="p">,</span> <span class="n">sized_he_image</span><span class="p">)</span>
+            <span class="n">image_composite_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mz_image_transformed</span><span class="p">)</span>
+            <span class="n">overlay_msi_he</span><span class="p">(</span><span class="n">mz_image_transformed</span><span class="p">,</span><span class="n">sized_he_image</span><span class="p">,</span><span class="n">mz</span><span class="p">)</span>
+        <span class="n">composite_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image_composite_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">composite_image</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Composite image for protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_composite_image.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">sized_he_image</span> <span class="o">=</span> <span class="n">sized_he_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">composite_image</span> <span class="o">=</span> <span class="n">composite_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">overlay_composite_image_5</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_5percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_10</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_10percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_15</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_15percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_50</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_50</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_50percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_20</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_20</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay protein &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_protein_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_20percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+        
+<div class="viewcode-block" id="merge_all_results_gene_wise">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results_gene_wise">[docs]</a>
+<span class="k">def</span> <span class="nf">merge_all_results_gene_wise</span><span class="p">(</span><span class="n">output_directory</span><span class="p">,</span><span class="n">sample_name</span><span class="p">,</span><span class="n">fragger_out</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">sized_he_image</span><span class="p">,</span><span class="n">b_spline_apply</span><span class="p">):</span>
+    <span class="n">mz_image_dir_path</span> <span class="o">=</span> <span class="n">output_directory</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_mz_images&#39;</span>
+    <span class="k">try</span><span class="p">:</span>  
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mz_image_dir_path</span><span class="p">)</span>  
+    <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>  
+        <span class="k">pass</span>
+    <span class="n">ms_fragger_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">fragger_out</span><span class="p">)</span>
+    <span class="n">prot_list_df</span> <span class="o">=</span> <span class="n">ms_fragger_results</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Gene&#39;</span><span class="p">])</span>
+    <span class="n">prot_list</span> <span class="o">=</span> <span class="n">prot_list_df</span><span class="p">[</span><span class="s1">&#39;Gene&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">prot_list</span><span class="p">:</span>
+        <span class="n">mz_image_dir_protein_path</span> <span class="o">=</span> <span class="n">mz_image_dir_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s1">&#39;_mz_images&#39;</span>
+        <span class="k">try</span><span class="p">:</span>  
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">mz_image_dir_protein_path</span><span class="p">)</span>  
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>  
+            <span class="k">pass</span>
+        <span class="n">prot_filtered_df</span> <span class="o">=</span> <span class="n">ms_fragger_results</span><span class="p">[</span><span class="n">ms_fragger_results</span><span class="p">[</span><span class="s1">&#39;Gene&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">]</span>
+        <span class="n">image_composite_array</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">prot_filtered_df</span><span class="p">)):</span>
+            <span class="n">mz</span> <span class="o">=</span> <span class="n">prot_filtered_df</span><span class="p">[</span><span class="s1">&#39;Peptide Theoretical m/z (+1)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">tol</span> <span class="o">=</span> <span class="n">prot_filtered_df</span><span class="p">[</span><span class="s1">&#39;Calc. Da Error Threshold&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">z_value</span><span class="o">=</span><span class="mi">1</span>
+            <span class="n">mz_image_transformed</span> <span class="o">=</span> <span class="n">extract_mz_image_transform</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mz</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">z_value</span><span class="p">,</span> <span class="n">b_spline_apply</span><span class="p">,</span> <span class="n">sized_he_image</span><span class="p">)</span>
+            <span class="n">image_composite_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mz_image_transformed</span><span class="p">)</span>
+            <span class="n">overlay_msi_he</span><span class="p">(</span><span class="n">mz_image_transformed</span><span class="p">,</span><span class="n">sized_he_image</span><span class="p">,</span><span class="n">mz</span><span class="p">)</span>
+        <span class="n">composite_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image_composite_array</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">composite_image</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Composite image for gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_composite_image.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">sized_he_image</span> <span class="o">=</span> <span class="n">sized_he_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">composite_image</span> <span class="o">=</span> <span class="n">composite_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">overlay_composite_image_5</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_5percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_10</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_10percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_15</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_15percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_50</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_50</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_50percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">overlay_composite_image_20</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">sized_he_image</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">composite_image</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">overlay_composite_image_20</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;MSI/H&amp;E overlay gene &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">mz_image_dir_protein_path</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_gene_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;_overlay_composite_image_20percentweight.png&#39;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Li Lab (UW-Madison).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

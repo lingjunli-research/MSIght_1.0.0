@@ -1,0 +1,73 @@
+MSIght
+======
+
+MSIght is a powerful and flexible tool for integrating multispectral imaging data with histological analysis and proteomics-based insights. It is designed to streamline your data workflows, from pre-processing and registration to clustering and visualization.
+
+Installation
+------------
+
+You can install MSIght from PyPI with:
+
+.. code-block:: console
+
+   pip install MSIght
+
+If you prefer to install from source, clone the GitHub repository and run:
+
+.. code-block:: console
+
+   git clone https://github.com/lingjunli-research/MSIght.git
+   cd MSIght
+   pip install .
+
+
+A Quick Example
+---------------
+
+Here's a quick example showing how to load data, apply an analysis pipeline, and visualize the results:
+
+.. code-block:: python
+
+   from MSIght.refactor_segment import cluster_msi
+   from MSIght import refactor_common_functions
+
+   filename = "my_data.imzML"
+   output_directory = "results"
+   sample_name = "sample_001"
+   sigma = 1.0
+   structuring_element_size = 3
+   pca_components = 2
+   tsne_components = 2
+   tsne_perplexity = 30
+   tsne_learning_rate = 200
+   tsne_iterations = 500
+   k_means_cluster_number = 5
+
+   # Run the clustering pipeline
+   results = cluster_msi(filename, output_directory, sample_name, sigma, structuring_element_size,
+                         pca_components, tsne_components, tsne_perplexity,
+                         tsne_learning_rate, tsne_iterations, k_means_cluster_number)
+
+   # The returned 'results' can now be used for further analysis or visualization
+   # For example, you can use refactor_common_functions to process or plot your data
+
+Documentation
+-------------
+
+For more detailed usage guides, tutorials, and API references, please see the following pages:
+
+- :doc:`modules`
+- :doc:`api_reference`
+
+These pages provide comprehensive details on each module, as well as code examples, parameters, and return values for all public functions.
+
+Contributing
+------------
+
+We welcome contributions! If you want to report a bug, suggest a feature, or contribute code:
+
+1. Check the issue tracker for existing reports or requests.
+2. Submit a new issue if your topic isn't covered.
+3. Fork the repository, make your changes, and open a pull request.
+
+Your feedback and involvement help improve MSIght for everyone.

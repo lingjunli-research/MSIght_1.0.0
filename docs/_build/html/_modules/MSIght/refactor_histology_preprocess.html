@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSIght.refactor_histology_preprocess &mdash; MSIght December 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8a903c05"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MSIght
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api_reference.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MSIght</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">MSIght.refactor_histology_preprocess</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for MSIght.refactor_histology_preprocess</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Fri Nov 15 17:08:52 2024</span>
+
+<span class="sd">@author: lafields2</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<div class="viewcode-block" id="load_he_image">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.load_he_image">[docs]</a>
+<span class="k">def</span> <span class="nf">load_he_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">):</span> <span class="c1"># Load the H&amp;E image</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span></div>
+
+
+<div class="viewcode-block" id="foreground_mask_make">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.foreground_mask_make">[docs]</a>
+<span class="k">def</span> <span class="nf">foreground_mask_make</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="n">hsv_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2HSV</span><span class="p">)</span> <span class="c1"># Convert the image to HSV color space</span>
+    <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Adjust as needed</span>
+    <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>  <span class="c1"># Adjust as needed</span>
+    <span class="n">background_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">inRange</span><span class="p">(</span><span class="n">hsv_image</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">)</span>
+    <span class="n">foreground_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_not</span><span class="p">(</span><span class="n">background_mask</span><span class="p">)</span> <span class="c1"># Invert the mask to get the foreground (i.e., the tissue)</span>
+    <span class="k">return</span> <span class="n">foreground_mask</span></div>
+
+
+<div class="viewcode-block" id="foreground_extract">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.foreground_extract">[docs]</a>
+<span class="k">def</span> <span class="nf">foreground_extract</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">foreground_mask</span><span class="p">):</span>
+    <span class="n">foreground_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">foreground_mask</span><span class="p">)</span> <span class="c1">#Apply the foreground mask to the original image to remove the background</span>
+    <span class="k">return</span> <span class="n">foreground_image</span></div>
+
+
+<div class="viewcode-block" id="red_channel_extract">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.red_channel_extract">[docs]</a>
+<span class="k">def</span> <span class="nf">red_channel_extract</span><span class="p">(</span><span class="n">foreground_image</span><span class="p">):</span>
+    <span class="n">red_channel</span> <span class="o">=</span> <span class="n">foreground_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># Extract the red channel from the foreground image</span>
+    <span class="k">return</span> <span class="n">red_channel</span></div>
+
+
+<div class="viewcode-block" id="bin_he_image">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.bin_he_image">[docs]</a>
+<span class="k">def</span> <span class="nf">bin_he_image</span><span class="p">(</span><span class="n">threshold_value</span><span class="p">,</span><span class="n">red_channel</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">thresholded_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">red_channel</span><span class="p">,</span> <span class="n">threshold_value</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">thresholded_image</span></div>
+
+
+<div class="viewcode-block" id="smooth_he_image">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.smooth_he_image">[docs]</a>
+<span class="k">def</span> <span class="nf">smooth_he_image</span><span class="p">(</span><span class="n">thresholded_image</span><span class="p">):</span>
+    <span class="n">smoothed_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">GaussianBlur</span><span class="p">(</span><span class="n">thresholded_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">smoothed_image</span></div>
+
+
+<div class="viewcode-block" id="preprocess_he">
+<a class="viewcode-back" href="../../api_reference.html#MSIght.refactor_histology_preprocess.preprocess_he">[docs]</a>
+<span class="k">def</span> <span class="nf">preprocess_he</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span><span class="n">threshold_value</span><span class="p">,</span><span class="n">sample_name</span><span class="p">,</span><span class="n">output_directory</span><span class="p">):</span>
+    <span class="n">he_image</span> <span class="o">=</span> <span class="n">load_he_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">foreground_mask_he_image</span> <span class="o">=</span> <span class="n">foreground_mask_make</span><span class="p">(</span><span class="n">he_image</span><span class="p">)</span>
+    <span class="n">foreground_he_image</span> <span class="o">=</span> <span class="n">foreground_extract</span><span class="p">(</span><span class="n">he_image</span><span class="p">,</span><span class="n">foreground_mask_he_image</span><span class="p">)</span>
+    <span class="n">red_channel_he_image</span> <span class="o">=</span> <span class="n">red_channel_extract</span><span class="p">(</span><span class="n">foreground_he_image</span><span class="p">)</span>
+    <span class="n">thresholded_he_image</span> <span class="o">=</span> <span class="n">bin_he_image</span><span class="p">(</span><span class="n">threshold_value</span><span class="p">,</span><span class="n">red_channel_he_image</span><span class="p">)</span>
+    <span class="n">final_he_image</span> <span class="o">=</span> <span class="n">smooth_he_image</span><span class="p">(</span><span class="n">thresholded_he_image</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">he_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Foreground Mask&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">foreground_mask_he_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Foreground Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">foreground_he_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Red Channel&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">red_channel_he_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Thresholded Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">thresholded_he_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Smoothed Image&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">final_he_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">fig_outpath</span> <span class="o">=</span> <span class="n">output_directory</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">sample_name</span> <span class="o">+</span> <span class="s1">&#39;_HE_processed_image.png&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fig_outpath</span><span class="p">,</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">final_he_image</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Li Lab (UW-Madison).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

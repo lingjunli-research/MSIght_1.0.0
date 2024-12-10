@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; MSIght December 2024 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8a903c05"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="MSIght.refactor_mz_image_extract" href="_autosummary/MSIght.refactor_mz_image_extract.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MSIght
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Modules</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.cluster_msi"><code class="docutils literal notranslate"><span class="pre">cluster_msi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.cluster_msi_scored_w_csv"><code class="docutils literal notranslate"><span class="pre">cluster_msi_scored_w_csv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.cluster_removal"><code class="docutils literal notranslate"><span class="pre">cluster_removal()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.composite_wo_selected_clusters"><code class="docutils literal notranslate"><span class="pre">composite_wo_selected_clusters()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.make_composite_image"><code class="docutils literal notranslate"><span class="pre">make_composite_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_segment.remove_residual_noise"><code class="docutils literal notranslate"><span class="pre">remove_residual_noise()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_affine_transform.display_and_save_image"><code class="docutils literal notranslate"><span class="pre">display_and_save_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_affine_transform.register_he_msi"><code class="docutils literal notranslate"><span class="pre">register_he_msi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_bspline.perform_bspline"><code class="docutils literal notranslate"><span class="pre">perform_bspline()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_cluster_optimize.bottom_up_hierarchical_clustering"><code class="docutils literal notranslate"><span class="pre">bottom_up_hierarchical_clustering()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_cluster_optimize.kmeans_cluster_msi_scored_w_csv"><code class="docutils literal notranslate"><span class="pre">kmeans_cluster_msi_scored_w_csv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_fragger_process.global_proteomics_search"><code class="docutils literal notranslate"><span class="pre">global_proteomics_search()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_fragger_process.process_fragger"><code class="docutils literal notranslate"><span class="pre">process_fragger()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_fragger_process.process_fragger_gene"><code class="docutils literal notranslate"><span class="pre">process_fragger_gene()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results"><code class="docutils literal notranslate"><span class="pre">merge_all_results()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results_gene_wise"><code class="docutils literal notranslate"><span class="pre">merge_all_results_gene_wise()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.bin_he_image"><code class="docutils literal notranslate"><span class="pre">bin_he_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.foreground_extract"><code class="docutils literal notranslate"><span class="pre">foreground_extract()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.foreground_mask_make"><code class="docutils literal notranslate"><span class="pre">foreground_mask_make()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.load_he_image"><code class="docutils literal notranslate"><span class="pre">load_he_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.preprocess_he"><code class="docutils literal notranslate"><span class="pre">preprocess_he()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.red_channel_extract"><code class="docutils literal notranslate"><span class="pre">red_channel_extract()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_histology_preprocess.smooth_he_image"><code class="docutils literal notranslate"><span class="pre">smooth_he_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_interpolation.interpolate_MSI"><code class="docutils literal notranslate"><span class="pre">interpolate_MSI()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_interpolation.interpolate_and_visualize"><code class="docutils literal notranslate"><span class="pre">interpolate_and_visualize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_common_functions.apply_dimensionality_reduction"><code class="docutils literal notranslate"><span class="pre">apply_dimensionality_reduction()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_common_functions.create_intensity_matrix"><code class="docutils literal notranslate"><span class="pre">create_intensity_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_common_functions.load_and_preprocess_imzml"><code class="docutils literal notranslate"><span class="pre">load_and_preprocess_imzml()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_manual_affine.manual_register_he_msi"><code class="docutils literal notranslate"><span class="pre">manual_register_he_msi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_manual_affine.show_msi_he_coords"><code class="docutils literal notranslate"><span class="pre">show_msi_he_coords()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_manual_affine_transform.manual_register_he_msi"><code class="docutils literal notranslate"><span class="pre">manual_register_he_msi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_mz_image_extract.apply_bspline_transform_to_msi"><code class="docutils literal notranslate"><span class="pre">apply_bspline_transform_to_msi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_mz_image_extract.extract_mz_image_transform"><code class="docutils literal notranslate"><span class="pre">extract_mz_image_transform()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#MSIght.refactor_mz_image_extract.overlay_msi_he"><code class="docutils literal notranslate"><span class="pre">overlay_msi_he()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MSIght</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api_reference.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>This page documents the code in the MSIght package.</p>
+<p id="module-MSIght.refactor_segment">Created on Fri Nov 15 16:33:13 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.cluster_msi">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">cluster_msi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structuring_element_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_perplexity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_interations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_learning_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_means_cluster_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#cluster_msi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.cluster_msi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.cluster_msi_scored_w_csv">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">cluster_msi_scored_w_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structuring_element_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_verbose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_means_cluster_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#cluster_msi_scored_w_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.cluster_msi_scored_w_csv" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.cluster_removal">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">cluster_removal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_image_full</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend_handles_full</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusters_to_remove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#cluster_removal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.cluster_removal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.composite_wo_selected_clusters">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">composite_wo_selected_clusters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clusters_to_remove</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composite_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#composite_wo_selected_clusters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.composite_wo_selected_clusters" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.make_composite_image">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">make_composite_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#make_composite_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.make_composite_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_segment.remove_residual_noise">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_segment.</span></span><span class="sig-name descname"><span class="pre">remove_residual_noise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filtered_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median_filter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_segment.html#remove_residual_noise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_segment.remove_residual_noise" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_affine_transform">Created on Fri Nov 15 17:01:41 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_affine_transform.display_and_save_image">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_affine_transform.</span></span><span class="sig-name descname"><span class="pre">display_and_save_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_affine_transform.html#display_and_save_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_affine_transform.display_and_save_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_affine_transform.register_he_msi">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_affine_transform.</span></span><span class="sig-name descname"><span class="pre">register_he_msi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cropped_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_msi_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msi_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">he_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_affine_transform.html#register_he_msi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_affine_transform.register_he_msi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_bspline">Created on Fri Nov 15 17:11:11 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_bspline.perform_bspline">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_bspline.</span></span><span class="sig-name descname"><span class="pre">perform_bspline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformed_ms_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_histograms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gradient_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer_iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">courseness</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_bspline.html#perform_bspline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_bspline.perform_bspline" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_cluster_optimize">Created on Fri Nov 15 17:12:18 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_cluster_optimize.bottom_up_hierarchical_clustering">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_cluster_optimize.</span></span><span class="sig-name descname"><span class="pre">bottom_up_hierarchical_clustering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structuring_element_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_verbose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_clusters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_cluster_optimize.html#bottom_up_hierarchical_clustering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_cluster_optimize.bottom_up_hierarchical_clustering" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_cluster_optimize.kmeans_cluster_msi_scored_w_csv">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_cluster_optimize.</span></span><span class="sig-name descname"><span class="pre">kmeans_cluster_msi_scored_w_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structuring_element_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_verbose</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_means_cluster_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_clusters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_cluster_optimize.html#kmeans_cluster_msi_scored_w_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_cluster_optimize.kmeans_cluster_msi_scored_w_csv" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_fragger_process">Created on Fri Nov 15 17:19:57 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_fragger_process.global_proteomics_search">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_fragger_process.</span></span><span class="sig-name descname"><span class="pre">global_proteomics_search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fragger_results_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_prot_instances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ppm_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_fragger_process.html#global_proteomics_search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_fragger_process.global_proteomics_search" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_fragger_process.process_fragger">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_fragger_process.</span></span><span class="sig-name descname"><span class="pre">process_fragger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protein_oi_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ppm_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psm_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_fragger_process.html#process_fragger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_fragger_process.process_fragger" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_fragger_process.process_fragger_gene">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_fragger_process.</span></span><span class="sig-name descname"><span class="pre">process_fragger_gene</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gene_oi_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ppm_error</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">psm_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_fragger_process.html#process_fragger_gene"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_fragger_process.process_fragger_gene" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_he_lcmsms_msi_merge">Created on Fri Nov 15 17:21:54 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_he_lcmsms_msi_merge.merge_all_results">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_he_lcmsms_msi_merge.</span></span><span class="sig-name descname"><span class="pre">merge_all_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragger_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_spline_apply</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_he_lcmsms_msi_merge.html#merge_all_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_he_lcmsms_msi_merge.merge_all_results_gene_wise">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_he_lcmsms_msi_merge.</span></span><span class="sig-name descname"><span class="pre">merge_all_results_gene_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fragger_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_spline_apply</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_he_lcmsms_msi_merge.html#merge_all_results_gene_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_he_lcmsms_msi_merge.merge_all_results_gene_wise" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_histology_preprocess">Created on Fri Nov 15 17:08:52 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.bin_he_image">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">bin_he_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threshold_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">red_channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#bin_he_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.bin_he_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.foreground_extract">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">foreground_extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">foreground_mask</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#foreground_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.foreground_extract" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.foreground_mask_make">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">foreground_mask_make</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#foreground_mask_make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.foreground_mask_make" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.load_he_image">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">load_he_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#load_he_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.load_he_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.preprocess_he">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">preprocess_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#preprocess_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.preprocess_he" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.red_channel_extract">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">red_channel_extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">foreground_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#red_channel_extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.red_channel_extract" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_histology_preprocess.smooth_he_image">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_histology_preprocess.</span></span><span class="sig-name descname"><span class="pre">smooth_he_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thresholded_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_histology_preprocess.html#smooth_he_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_histology_preprocess.smooth_he_image" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_interpolation">Created on Fri Nov 15 17:05:38 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_interpolation.interpolate_MSI">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_interpolation.</span></span><span class="sig-name descname"><span class="pre">interpolate_MSI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msi_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothed_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_interpolation.html#interpolate_MSI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_interpolation.interpolate_MSI" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_interpolation.interpolate_and_visualize">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_interpolation.</span></span><span class="sig-name descname"><span class="pre">interpolate_and_visualize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msi_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothed_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_areas_to_zoom</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_interpolation.html#interpolate_and_visualize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_interpolation.interpolate_and_visualize" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_common_functions">Created on Thu Nov 21 15:28:00 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_common_functions.apply_dimensionality_reduction">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_common_functions.</span></span><span class="sig-name descname"><span class="pre">apply_dimensionality_reduction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">intensity_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_perplexity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_interations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsne_learning_rate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_common_functions.html#apply_dimensionality_reduction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_common_functions.apply_dimensionality_reduction" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_common_functions.create_intensity_matrix">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_common_functions.</span></span><span class="sig-name descname"><span class="pre">create_intensity_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coordinates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mz_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensities</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_common_functions.html#create_intensity_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_common_functions.create_intensity_matrix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_common_functions.load_and_preprocess_imzml">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_common_functions.</span></span><span class="sig-name descname"><span class="pre">load_and_preprocess_imzml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">structuring_element_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_common_functions.html#load_and_preprocess_imzml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_common_functions.load_and_preprocess_imzml" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_manual_affine">Created on Fri Nov 15 17:27:23 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_manual_affine.manual_register_he_msi">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_manual_affine.</span></span><span class="sig-name descname"><span class="pre">manual_register_he_msi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts_ms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts_he</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_msi_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cropped_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_manual_affine.html#manual_register_he_msi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_manual_affine.manual_register_he_msi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_manual_affine.show_msi_he_coords">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_manual_affine.</span></span><span class="sig-name descname"><span class="pre">show_msi_he_coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">final_MSI_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">final_he_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_manual_affine.html#show_msi_he_coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_manual_affine.show_msi_he_coords" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_manual_affine_transform">Created on Fri Nov 15 17:26:18 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_manual_affine_transform.manual_register_he_msi">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_manual_affine_transform.</span></span><span class="sig-name descname"><span class="pre">manual_register_he_msi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pts_ms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pts_he</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resized_msi_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cropped_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_manual_affine_transform.html#manual_register_he_msi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_manual_affine_transform.manual_register_he_msi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<p id="module-MSIght.refactor_mz_image_extract">Created on Fri Nov 15 17:28:29 2024</p>
+<p>&#64;author: lafields2</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_mz_image_extract.apply_bspline_transform_to_msi">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_mz_image_extract.</span></span><span class="sig-name descname"><span class="pre">apply_bspline_transform_to_msi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b_spline_transform</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msi_data_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_mz_image_extract.html#apply_bspline_transform_to_msi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_mz_image_extract.apply_bspline_transform_to_msi" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_mz_image_extract.extract_mz_image_transform">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_mz_image_extract.</span></span><span class="sig-name descname"><span class="pre">extract_mz_image_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mz_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b_spline_apply</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_mz_image_extract.html#extract_mz_image_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_mz_image_extract.extract_mz_image_transform" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="MSIght.refactor_mz_image_extract.overlay_msi_he">
+<span class="sig-prename descclassname"><span class="pre">MSIght.refactor_mz_image_extract.</span></span><span class="sig-name descname"><span class="pre">overlay_msi_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msi_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sized_he_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/MSIght/refactor_mz_image_extract.html#overlay_msi_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#MSIght.refactor_mz_image_extract.overlay_msi_he" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="_autosummary/MSIght.refactor_mz_image_extract.html" class="btn btn-neutral float-left" title="MSIght.refactor_mz_image_extract" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Li Lab (UW-Madison).</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
