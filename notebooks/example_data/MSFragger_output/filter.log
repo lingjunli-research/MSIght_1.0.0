@@ -1,0 +1,28 @@
+time="12:53:21" level=info msg="Executing Filter  v5.1.1"
+time="12:53:21" level=info msg="Processing peptide identification files"
+time="12:53:21" level=info msg="Parsing D:\\Manuscripts\\2024_MSIight\\MSFragger_test\\headless_test\\output_v01\\interact-20240702_R0008-R3.pep.xml"
+time="12:53:21" level=info msg="Parsing D:\\Manuscripts\\2024_MSIight\\MSFragger_test\\headless_test\\output_v01\\interact-20240702_R0008-R1.pep.xml"
+time="12:53:21" level=info msg="Parsing D:\\Manuscripts\\2024_MSIight\\MSFragger_test\\headless_test\\output_v01\\interact-20240702_R0008-R2.pep.xml"
+time="12:53:23" level=info msg="1+ Charge profile" decoy=0 target=0
+time="12:53:23" level=info msg="2+ Charge profile" decoy=164 target=8681
+time="12:53:23" level=info msg="3+ Charge profile" decoy=220 target=18042
+time="12:53:23" level=info msg="4+ Charge profile" decoy=84 target=7106
+time="12:53:23" level=info msg="5+ Charge profile" decoy=9 target=812
+time="12:53:23" level=info msg="6+ Charge profile" decoy=4 target=33
+time="12:53:23" level=info msg="Database search results" ions=4287 peptides=3832 psms=35155
+time="12:53:23" level=info msg="Converged to 1.00 % FDR with 34480 PSMs" decoy=344 threshold=0.588698 total=34824
+time="12:53:23" level=info msg="Converged to 0.98 % FDR with 3262 Peptides" decoy=32 threshold=0.885398 total=3294
+time="12:53:23" level=info msg="Converged to 1.00 % FDR with 3704 Ions" decoy=37 threshold=0.879895 total=3741
+time="12:53:23" level=info msg="Protein inference results" decoy=249 target=1249
+time="12:53:23" level=info msg="Converged to 0.92 % FDR with 874 Proteins" decoy=8 threshold=0.9397 total=882
+time="12:53:23" level=info msg="Applying sequential FDR estimation" ions=3752 peptides=3303 psms=34231
+time="12:53:23" level=info msg="Converged to 0.11 % FDR with 34192 PSMs" decoy=39 threshold=0.588702 total=34231
+time="12:53:23" level=info msg="Converged to 0.24 % FDR with 3295 Peptides" decoy=8 threshold=0.588702 total=3303
+time="12:53:23" level=info msg="Converged to 0.24 % FDR with 3743 Ions" decoy=9 threshold=0.588702 total=3752
+time="12:53:23" level=info msg="Post processing identifications"
+time="12:53:23" level=info msg="Assigning protein identifications to layers"
+time="12:53:31" level=info msg="Processing protein inference"
+time="12:53:31" level=info msg="Synchronizing PSMs and proteins"
+time="12:53:31" level=info msg="Final report numbers after FDR filtering, and post-processing" ions=3742 peptides=3294 proteins=873 psms=34189
+time="12:53:31" level=info msg=Saving
+time="12:53:31" level=info msg=Done
