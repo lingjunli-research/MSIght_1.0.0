@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/msight-100/badge/?version=latest
+   :target: https://msight-100.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 <div align="center">
 <img src="https://github.com/laurenfields/MSIght/blob/main/utils/MSIght_logo.png">
 </div>
