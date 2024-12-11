@@ -1,4 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/msight-100/badge/?version=latest)](https://msight-100.readthedocs.io/en/latest/?badge=latest)
+![Unit Tests](https://github.com/laurenfields/MSIght_1.0.0/actions/workflows/ci.yml/badge.svg)
 
 
 <div align="center">
