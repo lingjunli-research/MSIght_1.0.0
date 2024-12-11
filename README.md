@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/mokapot/badge/?version=latest
+   :target: https://mokapot.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 <div align="center">
 <img src="https://github.com/laurenfields/MSIght/blob/main/utils/MSIght_logo.png">
 </div>
