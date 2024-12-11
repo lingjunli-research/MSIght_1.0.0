@@ -36,7 +36,7 @@ extensions = [
     'sphinx.ext.napoleon',     # If you use Google or NumPy style docstrings
     'sphinx.ext.viewcode',     # Links to source code
     'sphinx.ext.autosummary',  # Summaries of modules/classes
-    'sphinx.ext.sphinx_rtd_theme' #theme
+    'sphinx_rtd_theme' #theme
 ]
 autosummary_generate = True # Ensure that autosummary generates .rst files automatically
 
