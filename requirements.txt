@@ -12,3 +12,5 @@ seaborn==0.11.2
 SimpleITK==2.4.0
 tifffile==2023.4.12
 sphinx_rtd_theme==1.0.0
+notebook==7.3.1
+jupyter_server==2.14.2
