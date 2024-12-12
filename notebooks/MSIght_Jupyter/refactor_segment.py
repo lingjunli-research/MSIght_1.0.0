@@ -40,7 +40,7 @@ def cluster_msi(filename,output_directory,sample_name,sigma,structuring_element_
     sns.scatterplot(
         x="tsne-one", y="tsne-two",
         hue="cluster",
-        palette=sns.color_palette("tab10"),
+        #palette=sns.color_palette("tab10"),
         data=df,
         legend="full",
         alpha=0.6
