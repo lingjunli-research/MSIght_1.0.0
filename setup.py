@@ -13,7 +13,7 @@ with open("requirements.txt", "r") as f:
 
 setup(
     name="MSIght", 
-    version="1.0.0",
+    version="1.0.3",
     author="Li Labs (University of Wisconsin-Madison)",
     author_email="lafields2@wisc.edu",
     description="MSIght is an open-source Python-based algorithm designed for proteome characterization from the automated integration of histology, LC-MS/MS, and MSI datasets.",
