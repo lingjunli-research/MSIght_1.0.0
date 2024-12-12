@@ -18,8 +18,9 @@ MSIght is a program produced by the Lingjun Li Lab at the University of Wisconsi
 
 You can install MSIght directly from [PyPI](https://pypi.org/project/msight/):
 
-```bash
-pip install msight```
+```
+pip install msight
+```
 
 
 
